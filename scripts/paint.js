@@ -2,24 +2,37 @@
 
 import {checkAvg } from './validate.js';
 const cardE = document.getElementById('cardsEstudiantes');
+const cardP = document.getElementById('cardsProfesor');
 const students = [];
+const teacher = [];
+
 
 const paintCard = (tipo) =>{
     console.log(tipo);
     tipo = tipo.toUpperCase();
     const fragment = document.createDocumentFragment();
     const templateStudent = document.querySelector('#templateEstudiante').content;
+    const templateTeacher = document.querySelector('#templateProfesor').content;
 
     if (tipo=== 'ESTUDIANTE'){
        for(let i of students){
         const cloneTemp = templateStudent.cloneNode(true);
-        cloneTemp.querySelector('.title-card').innerHTML= "datos del estudiante";
-        cloneTemp.querySelector('.data-card').innerHTML = `nombre: ${i.nom.toUpperCase()} apellidos: ${i.ape.toUpperCase()}`;
-        cloneTemp.querySelector('.text-promedio').innerHTML = `promedio es: ${i.prom}`;
+        cloneTemp.querySelector('.title-card').innerHTML= "Datos del estudiante";
+        cloneTemp.querySelector('.data-card').innerHTML = `Nombre: ${i.nom.toUpperCase()} Apellidos: ${i.ape.toUpperCase()}`;
+        cloneTemp.querySelector('.text-promedio').innerHTML = `Promedio es: ${i.prom}`;
         cloneTemp.querySelector('.text-aprobado').innerHTML = `${checkAvg(i.prom)}`;
         fragment.appendChild(cloneTemp)
        } 
-    }else{
+    }else if (tipo=== 'PROFESOR'){
+        for(let i of students){
+         const cloneTemp = templateStudent.cloneNode(true);
+         cloneTemp.querySelector('.title-card').innerHTML= "Datos del profesor";
+         cloneTemp.querySelector('.data-card').innerHTML = `Nombre: ${i.nom.toUpperCase()} Apellidos: ${i.ape.toUpperCase()}`;
+         cloneTemp.querySelector('.text-promedio').innerHTML = `Su profesión es: ${i.prom}`;
+         cloneTemp.querySelector('.text-aprobado').innerHTML = `${checkAvg(i.prom)}`;
+         fragment.appendChild(cloneTemp)
+        } 
+        
         //pintar a profesor
     }
     cardE.appendChild(fragment);

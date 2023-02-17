@@ -19,17 +19,21 @@ btnAgregar.onclick = function(){
     const op = document.getElementById('opcion').value;
 
     //console.log<(`${name} ${lastname} ${avg} ${op}`);
-
-    if (validateString(name) && validateString (lastName) && op != 0){
-        if ((!isNaN(avg)) && (vAvg(avg))){
-            addStudent(name,lastName,avg)
-        }else{
-            document.querySelector('#promedio').value="";
-            modalAlert("promedio inválido");
+    if (op === 'estudiante'){
+        if (validateString(name) && validateString (lastName) && op != 0){
+            if ((!isNaN(avg)) && (vAvg(avg))){
+                addStudent(name,lastName,avg)
+                modalAlert ("Se agregó el estudiante")
+                document.getElementById('nombre').value="";
+                document.getElementById('apellido').value="";
+                document.querySelector('#promedio').value="";
+         }else{
+             document.querySelector('#promedio').value="";
+              modalAlert("Promedio inválido");
         }
-
+    }
     }else{
-        modalAlert("datos invalidos, revisar los datos");
+        modalAlert("Datos inválidos, revisar los datos");
     } document.getElementById('formulario').reset ()
 }
 btnMostrar.addEventListener("click", function () {
